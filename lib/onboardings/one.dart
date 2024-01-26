@@ -10,13 +10,45 @@ class OnboardingOne extends StatefulWidget {
 class _OnboardingOneState extends State<OnboardingOne> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    double minSide = MediaQuery.of(context).size.shortestSide * 0.1;
+
+    return SafeArea(
+      child: Stack(
         children: [
-          Container(
-            color: Colors.white,
-         child: Text('servies'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Positioned(
+                      top: 0,
+                      left: 0,
+                      child: SizedBox(
+                        width: minSide,
+                        height: minSide,
+                        child: Container(
+                          color: Colors.white,
+                          child: Image.asset(
+                            'images/Ellipse.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      )),
+                ],
+              ),
+              const Column(
+                children: [
+                  SizedBox(
+                      child: Text('skip',
+                          style: TextStyle(
+                            color: Colors.black,
+                            decoration: TextDecoration.none,
+                          ))),
+                ],
+              )
+            ],
           ),
+          // Add more widgets to the Stack if needed
         ],
       ),
     );

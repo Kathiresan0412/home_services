@@ -9,7 +9,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Splash(title: 'Home Services  Page'),
+      home: const Splash(title: 'Home Services Page'),
     );
   }
 }
@@ -33,14 +32,19 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
-  // void navigateToOtherUI() {
-  //   // Navigate to another UI, you can use Navigator.push or any other navigation method
-  //   Navigator.pushReplacement(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => const OnboardingOne()),
-  //   );
-  //   print('Navigate to another UI');
-  // }
+  @override
+  void initState() {
+    super.initState();
+
+    // Add a delay or any condition to decide when to navigate to OnboardingOne
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const OnboardingOne(),
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,23 +52,25 @@ class _SplashState extends State<Splash> {
     Color myColor = const Color(0xFF6759FF);
 
     return Scaffold(
-        body: GestureDetector(
-          // onTap: navigateToOtherUI,
-            child: Container(
-                color: myColor,
-                child: Center(
-                  child: ResponsiveBuilder(
-                    builder: (context, sizingInformation) {
-                      return SizedBox(
-                        width: minSide,
-                        height: minSide,
-                        child: Image.asset(
-                          'images/Group.jpg',
-                          fit: BoxFit.cover,
-                        ),
-                      );
-                    },
+      body: GestureDetector(
+        child: Container(
+          color: myColor,
+          child: Center(
+            child: ResponsiveBuilder(
+              builder: (context, sizingInformation) {
+                return SizedBox(
+                  width: minSide,
+                  height: minSide,
+                  child: Image.asset(
+                    'images/Group.jpg',
+                    fit: BoxFit.cover,
                   ),
-                ))));
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
