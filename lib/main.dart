@@ -1,63 +1,76 @@
 import 'package:flutter/material.dart';
-import 'screens/home.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:home_services/onboardings/one.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      home: CheckAuth(),
-      darkTheme:
-          ThemeData(brightness: Brightness.dark, hintColor: Colors.blueAccent),
-      themeMode: ThemeMode.dark,
+      title: 'Home Services',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const Splash(title: 'Home Services Page'),
     );
   }
 }
 
-class CheckAuth extends StatefulWidget {
+class Splash extends StatefulWidget {
+  const Splash({super.key, required this.title});
+
+  final String title;
+
   @override
-  _CheckAuthState createState() => _CheckAuthState();
+  State<Splash> createState() => _SplashState();
 }
 
-class _CheckAuthState extends State<CheckAuth> {
-  bool isAuth = false;
-
+class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    _checkIfLoggedIn();
-  }
 
-  void _checkIfLoggedIn() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var token = localStorage.getString('token');
-    if (token != null) {
-      if (mounted) {
-        setState(() {
-          isAuth = true;
-        });
-      }
-    }
+    // Add a delay or any condition to decide when to navigate to OnboardingOne
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const OnboardingOne(),
+        ),
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget child;
-    if (isAuth) {
-      child = Home();
-    } else {
-      child = Home();
-    }
+    double minSide = MediaQuery.of(context).size.shortestSide * 0.1;
+    Color myColor = const Color(0xFF6759FF);
 
     return Scaffold(
-      body: child,
+      body: GestureDetector(
+        child: Container(
+          color: myColor,
+          child: Center(
+            child: ResponsiveBuilder(
+              builder: (context, sizingInformation) {
+                return SizedBox(
+                  width: minSide,
+                  height: minSide,
+                  child: Image.asset(
+                    'images/Group.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
