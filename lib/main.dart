@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:home_services/onboardings/one.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,25 +48,34 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     double minSide = MediaQuery.of(context).size.shortestSide * 0.1;
-    Color myColor = const Color(0xFF6759FF);
 
     return Scaffold(
-      body: GestureDetector(
-        child: Container(
-          color: myColor,
-          child: Center(
-            child: ResponsiveBuilder(
-              builder: (context, sizingInformation) {
-                return SizedBox(
-                  width: minSide,
-                  height: minSide,
-                  child: Image.asset(
-                    'images/Group.jpg',
-                    fit: BoxFit.cover,
-                  ),
-                );
-              },
-            ),
+      body: Container(
+        color: Colors.deepPurpleAccent[400],
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment:MainAxisAlignment.center ,
+            children: [
+              SizedBox(
+                width: minSide * 2,
+                height: minSide * 2,
+                child: Row(
+                  children: [
+                    Image.asset(
+                      'images/Group.jpg',
+                      fit: BoxFit.cover,
+                    ),
+                  ],
+                ),
+              ),
+              const Text("Door Hub",
+                  style: TextStyle(
+                    fontSize: 36.70110321044922,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white
+                  ))
+            ],
           ),
         ),
       ),
