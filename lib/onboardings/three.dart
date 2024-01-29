@@ -44,27 +44,7 @@ class _OnboardingThreeState extends State<OnboardingThree> {
                     Padding(
                       padding: EdgeInsets.only(
                           top: minSide * 0.35, right: minSide * 0.5),
-                      child: SizedBox(
-                        width: minSide * 1.75,
-                        height: minSide * 0.75,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.teal[200],
-                            borderRadius: BorderRadius.circular(minSide * 0.5),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'skip',
-                              style: TextStyle(
-                                color: Colors.black,
-                                decoration: TextDecoration.none,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 25,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+             
                     ),
                   ],
                 ),
@@ -199,17 +179,18 @@ class _OnboardingThreeState extends State<OnboardingThree> {
               //     );
               //   },
               child: Container(
-                width: minSide * 5.15,
-                height: minSide * 1,
+                width: minSide * 5,
+                height: minSide * 1.5,
                 decoration: BoxDecoration(
                   color: Colors.blue,
-                  borderRadius: BorderRadius.circular(10),
+                  
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Center(
                   child: Text(
                     'Get Started',
                     style: TextStyle(
-                      fontWeight: FontWeight.w200,
+                      fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontSize: 35,
                       decoration: TextDecoration.none,
