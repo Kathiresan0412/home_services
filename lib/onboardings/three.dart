@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:home_services/onboardings/two.dart';
 
-class OnboardingOne extends StatefulWidget {
-  const OnboardingOne({super.key});
+class OnboardingThree extends StatefulWidget {
+  const OnboardingThree({super.key});
 
   @override
-  State<OnboardingOne> createState() => _OnboardingOneState();
+  State<OnboardingThree> createState() => _OnboardingThreeState();
 }
 
-class _OnboardingOneState extends State<OnboardingOne> {
+class _OnboardingThreeState extends State<OnboardingThree> {
   @override
   Widget build(BuildContext context) {
     double minSide = MediaQuery.of(context).size.shortestSide * 0.1;
@@ -45,27 +44,7 @@ class _OnboardingOneState extends State<OnboardingOne> {
                     Padding(
                       padding: EdgeInsets.only(
                           top: minSide * 0.35, right: minSide * 0.5),
-                      child: SizedBox(
-                        width: minSide * 1.75,
-                        height: minSide * 0.75,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.teal[200],
-                            borderRadius: BorderRadius.circular(minSide * 0.5),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'skip',
-                              style: TextStyle(
-                                color: Colors.black,
-                                decoration: TextDecoration.none,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 25,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+             
                     ),
                   ],
                 ),
@@ -96,7 +75,7 @@ class _OnboardingOneState extends State<OnboardingOne> {
                                   bottomRight: Radius.circular(70.0),
                                 ),
                                 child: Image.asset(
-                                  'images/image_girl.jpg',
+                                  'images/image_boy.jpg',
                                 ),
                               ),
                             ),
@@ -120,32 +99,32 @@ class _OnboardingOneState extends State<OnboardingOne> {
                         '.',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 235, 210, 249),
+                            decoration: TextDecoration.none,
+                            fontSize: 60),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        '.',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 235, 210, 249),
+                            decoration: TextDecoration.none,
+                            fontSize: 60),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        '.',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.none,
                             color: Colors.deepPurple,
-                            decoration: TextDecoration.none,
-                            fontSize: 60),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        '.',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 235, 210, 249),
-                            decoration: TextDecoration.none,
-                            fontSize: 60),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        '.',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 235, 210, 249),
-                            decoration: TextDecoration.none,
                             fontSize: 60),
                       )
                     ],
@@ -155,11 +134,11 @@ class _OnboardingOneState extends State<OnboardingOne> {
             ),
             Positioned(
               bottom: minSide * 5.5,
-              left: minSide * 2,
+              left: minSide * 1,
               child: const Row(
                 children: [
                   Text(
-                    "Beauty parlour\nat your home",
+                    "Professional home \ncleaning",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -189,32 +168,38 @@ class _OnboardingOneState extends State<OnboardingOne> {
             ),
             Positioned(
               bottom: minSide * 1.5,
-              left: minSide * 5,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const OnboardingTwo(),
+              left: minSide * 3,
+              // child: GestureDetector(
+              //   onTap: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         // builder: (context) => const OnboardingThree(),
+              //       ),
+              //     );
+              //   },
+              child: Container(
+                width: minSide * 5,
+                height: minSide * 1.5,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Get Started',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 35,
+                      decoration: TextDecoration.none,
                     ),
-                  );
-                },
-                child: Container(
-                  width: minSide * 1.5,
-                  height: minSide * 1.5,
-                  decoration: BoxDecoration(
-                    color: Colors.deepPurpleAccent[400],
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 50,
-                    color: Colors.white,
                   ),
                 ),
               ),
             ),
-
+            // ),
             // Add more widgets to the Stack if needed
           ],
         ),

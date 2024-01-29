@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:home_services/onboardings/two.dart';
+import 'package:home_services/onboardings/three.dart';
 
-class OnboardingOne extends StatefulWidget {
-  const OnboardingOne({super.key});
+class OnboardingTwo extends StatefulWidget {
+  const OnboardingTwo({super.key});
 
   @override
-  State<OnboardingOne> createState() => _OnboardingOneState();
+  State<OnboardingTwo> createState() => _OnboardingTwoState();
 }
 
-class _OnboardingOneState extends State<OnboardingOne> {
+class _OnboardingTwoState extends State<OnboardingTwo> {
   @override
   Widget build(BuildContext context) {
     double minSide = MediaQuery.of(context).size.shortestSide * 0.1;
@@ -96,7 +96,7 @@ class _OnboardingOneState extends State<OnboardingOne> {
                                   bottomRight: Radius.circular(70.0),
                                 ),
                                 child: Image.asset(
-                                  'images/image_girl.jpg',
+                                  'images/image_boy.jpg',
                                 ),
                               ),
                             ),
@@ -114,6 +114,18 @@ class _OnboardingOneState extends State<OnboardingOne> {
               left: minSide * 4,
               child: const Row(
                 children: [
+                  Column(
+                    children: [
+                      Text(
+                        '.',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 235, 210, 249),
+                            decoration: TextDecoration.none,
+                            fontSize: 60),
+                      )
+                    ],
+                  ),
                   Column(
                     children: [
                       Text(
@@ -138,28 +150,16 @@ class _OnboardingOneState extends State<OnboardingOne> {
                       )
                     ],
                   ),
-                  Column(
-                    children: [
-                      Text(
-                        '.',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 235, 210, 249),
-                            decoration: TextDecoration.none,
-                            fontSize: 60),
-                      )
-                    ],
-                  ),
                 ],
               ),
             ),
             Positioned(
               bottom: minSide * 5.5,
-              left: minSide * 2,
+              left: minSide * 1,
               child: const Row(
                 children: [
                   Text(
-                    "Beauty parlour\nat your home",
+                    " Plumber & expart \nnearby you",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -187,7 +187,7 @@ class _OnboardingOneState extends State<OnboardingOne> {
                 ],
               ),
             ),
-            Positioned(
+             Positioned(
               bottom: minSide * 1.5,
               left: minSide * 5,
               child: GestureDetector(
@@ -195,7 +195,7 @@ class _OnboardingOneState extends State<OnboardingOne> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const OnboardingTwo(),
+                      builder: (context) => const OnboardingThree(),
                     ),
                   );
                 },
@@ -214,7 +214,6 @@ class _OnboardingOneState extends State<OnboardingOne> {
                 ),
               ),
             ),
-
             // Add more widgets to the Stack if needed
           ],
         ),
