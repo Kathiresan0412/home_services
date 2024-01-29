@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_services/signin/signin.dart';
 
 class OnboardingThree extends StatefulWidget {
   const OnboardingThree({super.key});
@@ -169,15 +170,15 @@ class _OnboardingThreeState extends State<OnboardingThree> {
             Positioned(
               bottom: minSide * 1.5,
               left: minSide * 3,
-              // child: GestureDetector(
-              //   onTap: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         // builder: (context) => const OnboardingThree(),
-              //       ),
-              //     );
-              //   },
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Signin(),
+                    ),
+                  );
+                },
               child: Container(
                 width: minSide * 5,
                 height: minSide * 1.5,
@@ -199,7 +200,7 @@ class _OnboardingThreeState extends State<OnboardingThree> {
                 ),
               ),
             ),
-            // ),
+            ),
             // Add more widgets to the Stack if needed
           ],
         ),
