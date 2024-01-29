@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ddd/onboardings/one.dart';
+import 'package:ddd/Login/login.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 void main() {
@@ -12,12 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Home Services',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Splash(title: 'Home Services Page'),
+      home: SignIn(),
     );
   }
 }
@@ -40,7 +42,7 @@ class _SplashState extends State<Splash> {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const OnboardingOne(),
+          builder: (context) => SignIn(),
         ),
       );
     });
