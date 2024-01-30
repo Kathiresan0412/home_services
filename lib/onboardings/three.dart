@@ -14,7 +14,7 @@ class _OnboardingThreeState extends State<OnboardingThree> {
     double minSide = MediaQuery.of(context).size.shortestSide * 0.1;
 
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.background,
       child: SafeArea(
         child: Stack(
           children: [
@@ -29,13 +29,12 @@ class _OnboardingThreeState extends State<OnboardingThree> {
                       child: SizedBox(
                         width: minSide,
                         height: minSide,
-                        child: Container(
-                          color: Colors.white,
-                          child: Image.asset(
-                            'images/Ellipse.jpg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                         child: Container(
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(100)),
+                            color: Color.fromARGB(255, 229, 115, 115),
+                          ),)
                       ),
                     ),
                   ],
@@ -58,12 +57,12 @@ class _OnboardingThreeState extends State<OnboardingThree> {
                   padding: const EdgeInsets.only(top: 120),
                   child: Stack(
                     children: [
-                      Container(
+                      SizedBox(
                         // color: Colors.yellow,
                         width: minSide * 7,
                         height: minSide * 10,
                         child: Center(
-                          child: Container(
+                          child: SizedBox(
                             // color: Colors.red[700],
                             width: minSide * 5.5,
                             height: minSide * 8.5,
@@ -92,60 +91,40 @@ class _OnboardingThreeState extends State<OnboardingThree> {
             Positioned(
               top: minSide * 12.5,
               left: minSide * 4,
-              child: const Row(
+              child:  Row(
                 children: [
-                  Column(
-                    children: [
-                      Text(
-                        '.',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 235, 210, 249),
-                            decoration: TextDecoration.none,
-                            fontSize: 60),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        '.',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 235, 210, 249),
-                            decoration: TextDecoration.none,
-                            fontSize: 60),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        '.',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.none,
-                            color: Colors.deepPurple,
-                            fontSize: 60),
-                      )
-                    ],
-                  ),
+                  for (int i = 0; i < 3; i++)
+                    Column(
+                      children: [
+                        Text(
+                          '.',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: i == 2
+                                  ? Colors.deepPurple
+                                  : const Color.fromARGB(255, 235, 210, 249),
+                              decoration: TextDecoration.none,
+                              fontSize: 60),
+                        )
+                      ],
+                    ),
+                
                 ],
               ),
             ),
             Positioned(
               bottom: minSide * 5.5,
-              left: minSide * 1,
-              child: const Row(
+              left: minSide * 2,
+              child:  Row(
                 children: [
                   Text(
                     "Professional home \ncleaning",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 35,
-                        decoration: TextDecoration.none),
+                     textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 35,
+                                ) ??
+                            const TextStyle(),
                   ),
                 ],
               ),
@@ -153,16 +132,16 @@ class _OnboardingThreeState extends State<OnboardingThree> {
             Positioned(
               bottom: minSide * 4.0,
               left: minSide * 1,
-              child: const Row(
+              child:  Row(
                 children: [
                   Text(
                     "Lorem ipsum is a placeholder text commonly \nused to demonstrate the visual.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w200,
-                        color: Colors.black,
-                        fontSize: 15,
-                        decoration: TextDecoration.none),
+                   textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  fontWeight: FontWeight.w200,
+                                  fontSize: 20,
+                                ) ??
+                            const TextStyle(),
                   ),
                 ],
               ),

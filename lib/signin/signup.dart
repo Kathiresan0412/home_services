@@ -34,100 +34,116 @@ class _SignUpState extends State<SignUp> {
       appBar: AppBar(
         title: const Text('Sign Up'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: minSide * 3,
-                    width: minSide * 3,
-                    child: Image.asset('images/logo2.jpg'),
-                  )
-                ],
-              ),
-              Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      body: Container(
+        color: Theme.of(context).colorScheme.background,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    buildInputField(
-                        'First Name', Icons.person, _firstNameController),
-                    buildInputField(
-                        'Last Name', Icons.person, _lastNameController),
-                    buildInputField(
-                        'Phone Number', Icons.phone, _phoneNumberController),
-                    buildInputField('Email', Icons.email, _emailController),
-                    const SizedBox(height: 16),
                     SizedBox(
-                      width: minSide * 9,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            // Perform sign-up logic here
-                            String firstName = _firstNameController.text;
-                            String lastName = _lastNameController.text;
-                            String phoneNumber = _phoneNumberController.text;
-                            String email = _emailController.text;
-
-                            // Print or process the data as needed
-                            print('First Name: $firstName');
-                            print('Last Name: $lastName');
-                            print('Phone Number: $phoneNumber');
-                            print('Email: $email');
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(221, 234, 232, 232),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: const Text('Sign Up'),
-                      ),
-                    ),
-                    SizedBox(height: minSide * 1),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Already have an Account?',
-                          style: TextStyle(
-                            color: Colors.black45,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            // Navigate to SignUp page
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Signin()),
-                            );
-                          },
-                          child: const Text(
-                            'Sign up',
-                            style: TextStyle(
-                              color: Colors.lightBlue,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.none,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      height: minSide * 3,
+                      width: minSide * 3,
+                      child: Image.asset('images/logo2.jpg'),
+                    )
                   ],
                 ),
-              ),
-            ],
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildInputField(
+                          'First Name', Icons.person, _firstNameController),
+                      buildInputField(
+                          'Last Name', Icons.person, _lastNameController),
+                      buildInputField(
+                          'Phone Number', Icons.phone, _phoneNumberController),
+                      buildInputField('Email', Icons.email, _emailController),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        width: minSide * 9,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              // Perform sign-up logic here
+                              String firstName = _firstNameController.text;
+                              String lastName = _lastNameController.text;
+                              String phoneNumber = _phoneNumberController.text;
+                              String email = _emailController.text;
+
+                              // Print or process the data as needed
+                              print('First Name: $firstName');
+                              print('Last Name: $lastName');
+                              print('Phone Number: $phoneNumber');
+                              print('Email: $email');
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(221, 234, 232, 232),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: Text(
+                            'Sign Up',
+                            style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ) ??
+                                const TextStyle(
+                                  color: Colors.black
+                                ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: minSide * 1),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Already have an Account?',
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                        ) ??
+                                    const TextStyle(),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              // Navigate to SignUp page
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Signin()),
+                              );
+                            },
+                            child: const Text(
+                              'Sign up',
+                              style: TextStyle(
+                                color: Colors.lightBlue,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -143,11 +159,11 @@ class _SignUpState extends State<SignUp> {
         children: [
           Text(
             label,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ) ??
+                const TextStyle(),
           ),
           const SizedBox(height: 10),
           Container(

@@ -15,6 +15,7 @@ class PaymentState extends State<Payment> {
       body: const Column(
         children: [
           Row(
+            mainAxisAlignment:MainAxisAlignment.end,
             children: [
               Text('Add Card List'),
               Row(

@@ -16,7 +16,7 @@ class _SigninState extends State<Signin> {
   Widget build(BuildContext context) {
     double minSide = MediaQuery.of(context).size.shortestSide * 0.1;
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -33,18 +33,20 @@ class _SigninState extends State<Signin> {
                     ),
                   ],
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: EdgeInsets.only(right: 0),
                       child: Text(
                         'Door Hub',
-                        style: TextStyle(
-                            fontSize: 40,
-                            color: Colors.deepPurple,
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.none),
+                        textAlign: TextAlign.center,
+                        style:
+                            Theme.of(context).textTheme.headlineLarge?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 40,
+                                    ) ??
+                                const TextStyle(),
                       ),
                     ),
                   ],
@@ -146,7 +148,7 @@ class _SigninState extends State<Signin> {
                   ],
                 ),
                 SizedBox(
-                  height: minSide * 0.2,
+                  height: minSide * 0.5,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -197,14 +199,20 @@ class _SigninState extends State<Signin> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        side: const BorderSide(color: Colors.black, width: 1.0),
-                      ),
-                      child: const Text(
-                        'Continue as a Guest',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
+                        side: BorderSide(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary, // Change this to the appropriate color
+                          width: 1.0,
                         ),
+                      ),
+                      child: Text(
+                        'Continue as a Guest',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  fontSize: 30,
+                                ) ??
+                            const TextStyle(),
                       ),
                     ),
                   ],
@@ -215,13 +223,13 @@ class _SigninState extends State<Signin> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                     Text(
                       'Create a New Account?',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black45),
-                    ),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ) ??
+                            const TextStyle(),),
                     const Padding(padding: EdgeInsets.only(left: 5)),
                     GestureDetector(
                       onTap: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_services/onboardings/one.dart';
+import 'package:home_services/theme/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,10 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Home Services',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+       theme: lightMode, // Set the default theme to lightMode
+      darkTheme: darkMode, 
       home: const Splash(title: 'Home Services Page'),
     );
   }
@@ -51,7 +50,7 @@ class _SplashState extends State<Splash> {
 
     return Scaffold(
       body: Container(
-        color: Colors.deepPurpleAccent[400],
+        color:Theme.of(context).scaffoldBackgroundColor,
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
