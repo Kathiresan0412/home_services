@@ -3,7 +3,7 @@ import 'package:home_services/onboardings/one.dart';
 import 'package:home_services/theme/theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
