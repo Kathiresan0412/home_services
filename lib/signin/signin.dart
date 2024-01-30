@@ -1,6 +1,8 @@
 import 'package:flutter_social_button/flutter_social_button.dart';
 import 'package:flutter/material.dart';
+import 'package:home_services/signin/sidemenu/sidemenu.dart';
 import 'package:home_services/signin/signup.dart';
+import 'package:home_services/signin/verification.dart';
 
 class Signin extends StatefulWidget {
   const Signin({super.key});
@@ -16,8 +18,8 @@ class _SigninState extends State<Signin> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          child: Stack(children: [
-            Column(
+          child: SingleChildScrollView(
+            child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -183,21 +185,29 @@ class _SigninState extends State<Signin> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          side:
-                              const BorderSide(color: Colors.black, width: 1.0),
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Text(
-                          'Continue as a Guest',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 30,
-                          ),
-                        ))
+                        side: const BorderSide(color: Colors.black, width: 1.0),
+                      ),
+                      child: const Text(
+                        'Continue as a Guest',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const sidemenu()));
+                      },
+                    )
                   ],
                 ),
                 SizedBox(
@@ -208,8 +218,10 @@ class _SigninState extends State<Signin> {
                   children: [
                     const Text(
                       'Create a New Account?',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black45),
                     ),
                     const Padding(padding: EdgeInsets.only(left: 5)),
                     GestureDetector(
@@ -217,7 +229,7 @@ class _SigninState extends State<Signin> {
                         // Navigate to SignUp page
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const SignUp()),
+                          MaterialPageRoute(builder: (context) => SignUp()),
                         );
                       },
                       child: const Text(
@@ -226,15 +238,35 @@ class _SigninState extends State<Signin> {
                           color: Colors.lightBlue,
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.only(left: 5)),
+                    GestureDetector(
+                      onTap: () {
+                        // Navigate to SignUp page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Verification()),
+                        );
+                      },
+                      child: const Text(
+                        'verification',
+                        style: TextStyle(
+                          color: Colors.lightBlue,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.none,
                         ),
                       ),
                     ),
                   ],
                 ),
               ],
-            )
-          ]),
+            ),
+          ),
         ));
   }
 }
