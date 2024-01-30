@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:side_navigation/side_navigation.dart';
+import 'package:home_services/signin/navbar/calender.dart';
+import 'package:home_services/signin/navbar/payment.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -16,12 +17,8 @@ class SideMenu extends StatefulWidget {
 
 class SideMenuState extends State<SideMenu> {
   List<Widget> views = const [
-    Center(
-      child: Text('Calender'),
-    ),
-    Center(
-      child: Text('Payment Methods'),
-    ),
+    Calendar(),
+    Payment(),
     Center(
       child: Text('Address'),
     ),
@@ -46,102 +43,88 @@ class SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          SideNavigationBar(
-            selectedIndex: selectedIndex,
-            items: const [
-              SideNavigationBarItem(
-                icon: Icons.calendar_month,
-                label: 'Calender',
+      appBar: AppBar(
+        // title:  const Text('Current Location')
+        
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            const UserAccountsDrawerHeader(
+              accountName: Text('John Doe'),
+              accountEmail: Text('john.doe@example.com'),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://example.com/profile-image.jpg'), // Replace with your image URL
               ),
-              SideNavigationBarItem(
-                icon: Icons.payment,
-                label: 'Payment Methods',
-              ),
-              SideNavigationBarItem(
-                icon: Icons.area_chart,
-                label: 'Address',
-              ),
-              SideNavigationBarItem(
-                icon: Icons.notifications,
-                label: 'Notifications',
-              ),
-              SideNavigationBarItem(
-                icon: Icons.local_offer,
-                label: 'Offers',
-              ),
-              SideNavigationBarItem(
-                icon: Icons.person,
-                label: 'Refer a Friend',
-              ),
-              SideNavigationBarItem(
-                icon: Icons.support,
-                label: 'Support',
-              ),
-              SideNavigationBarItem(
-                icon: Icons.star,
-                label: 'Rate Us',
-              ),
-            ],
-            onTap: (index) {
-              setState(() {
-                selectedIndex = index;
-              });
-            },
-            toggler: SideBarToggler(
-              expandIcon: Icons.keyboard_arrow_left,
-              shrinkIcon: Icons.keyboard_arrow_right,
-              onToggle: () {
-                print('Toggle');
+            ),
+            ListTile(
+              leading: const Icon(Icons.calendar_month),
+              title: const Text('Calender'),
+              onTap: () {
+                navigateTo(0);
               },
             ),
-          ),
-          Positioned(
-            top: 0,
-            right: 0,
-            left: 0,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              color: Colors.purple, // Customize the background color
-              child:  const Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Profile Image
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundImage: NetworkImage(
-                        'https://example.com/profile-image.jpg'), // Replace with your image URL
-                  ),
-                  SizedBox(height: 8), // Added space between image and text
-                  // Profile Info
-                  Text(
-                    'John Doe',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    'john.doe@example.com',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
-                  ),
-                  // Add any other profile-related widgets as needed
-                ],
-              ),
+            ListTile(
+              leading: const Icon(Icons.payment),
+              title: const Text('Payment Methods'),
+              onTap: () {
+                navigateTo(1);
+              },
             ),
-          ),
-          Expanded(
-            child: views.elementAt(selectedIndex),
-          ),
-        ],
+            ListTile(
+              leading: const Icon(Icons.area_chart),
+              title: const Text('Address'),
+              onTap: () {
+                navigateTo(2);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.notifications),
+              title: const Text('Notifications'),
+              onTap: () {
+                navigateTo(3);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.local_offer),
+              title: const Text('Offers'),
+              onTap: () {
+                navigateTo(4);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Refer a Friend'),
+              onTap: () {
+                navigateTo(5);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.support),
+              title: const Text('Support'),
+              onTap: () {
+                navigateTo(6);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.star),
+              title: const Text('Rate Us'),
+              onTap: () {
+                navigateTo(7);
+              },
+            ),
+          ],
+        ),
       ),
+      body: views.elementAt(selectedIndex),
     );
+  }
+
+  void navigateTo(int index) {
+    setState(() {
+      selectedIndex = index;
+      Navigator.pop(context); // Close the drawer after selecting an item
+    });
   }
 }
