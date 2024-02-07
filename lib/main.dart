@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:home_services/onboardings/one.dart';
+import 'package:home_services/others/Service_Details.dart';
+import 'package:home_services/others/first.dart';
+import 'package:home_services/others/new.dart';
+import 'package:home_services/others/subcategory.dart';
+import 'package:home_services/others/tabbar.dart';
+
+import 'others/Upcoming_ Empty.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,12 +18,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Home Services',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Splash(title: 'Home Services Page'),
+      home:TabBarExample(),
     );
   }
 }
