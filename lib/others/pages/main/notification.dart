@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_services/others/widgets/heading.dart';
 
 class Alert extends StatelessWidget {
   const Alert({super.key});
@@ -9,7 +10,8 @@ class Alert extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notification'),
+         automaticallyImplyLeading: false,
+          title: Heading(title: "Notification"),
       ),
       body: const Center(
         child: Text("Notification"),

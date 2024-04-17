@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:home_services/others/pages/sub/categories/providers_services/service_model.dart';
 
 class ServiceCard extends StatelessWidget {
   const ServiceCard({
-    super.key,
-  });
+    Key? key,
+    required this.service,
+  }) : super(key: key);
 
-
+  final Service service;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.of(context).pushNamed("/Servicedetailpage");
+      onTap: () {
+        // Navigator.of(context).pushNamed("/Servicedetailpage");
+                  Navigator.of(context).pushNamed(
+  "/Servicedetailpage",
+  arguments: {'id': service.serviceId},
+);
+   
       },
       child: Container(
         margin: EdgeInsets.only(top: 10),
@@ -38,17 +45,30 @@ class ServiceCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.star,color: Colors.amber,),
+                    Icon(Icons.star, color: Colors.amber),
                     Text(
-                      "4.8",
+                      "${service.rating}", // Accessing service property directly
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
                       ),
                     ),
-                    Text(
-                      "(87)",
+                   
+                  ],
+                ),
+                Row(
+                  children: [
+                   
+                     Text(
+                      "${service.serviceName}",
                       style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                     Text(
+                       "(${service.providerName})",
+                       style: TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
@@ -57,14 +77,7 @@ class ServiceCard extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  "AC Check-Up",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                Text(
-                  "Starts From",
+                  "per_hour",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -72,13 +85,13 @@ class ServiceCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 5,horizontal: 10),
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFFB5E4CA),
                   ),
                   child: Text(
-                    "\$128",
+                     "Rs.${service.amountPerHour}",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,

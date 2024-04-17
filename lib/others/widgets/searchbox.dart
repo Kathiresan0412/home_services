@@ -17,7 +17,6 @@ class SearchBox extends StatelessWidget {
         //  controller: _controller,
         onChanged: (value) {},
         decoration: InputDecoration(
-          
           filled: true,
           fillColor: Colors.grey[250],
           hintText: 'Search what you need...',

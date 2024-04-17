@@ -7,8 +7,8 @@ class SplashScreenController {
 
   Future<void> checkUserStatusAndRedirect(BuildContext context) async {
 
-    Future.delayed(const Duration(seconds: 3)).then((val) {
-      Navigator.pushReplacementNamed(context, '/homePage');
+    Future.delayed(const Duration(seconds: 2)).then((val) {
+      Navigator.pushReplacementNamed(context, '/onboardingOne');
     });
 
   }

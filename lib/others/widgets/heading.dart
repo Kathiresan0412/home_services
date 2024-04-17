@@ -16,7 +16,7 @@ class _HeadingState extends State<Heading> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 20),
+      margin: EdgeInsets.only(left: 10),
       child: Row(
                         children: [
                           Container(

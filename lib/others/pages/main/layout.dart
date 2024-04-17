@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_services/others/auth/auth.dart';
 import 'package:home_services/others/pages/main/booking.dart';
 import 'package:home_services/others/pages/main/homepage.dart';
 import 'package:home_services/others/pages/main/notification.dart';
@@ -14,6 +15,23 @@ State<Layout> createState() => _LayoutState();
 
 class _LayoutState extends State<Layout> {
   int _selectedIndex = 0;
+ 
+    AuthDataSources authDataSources = AuthDataSources();
+        Map<String, dynamic>? userData;
+   
+  @override
+  void initState() {
+getSavedUserData();
+    super.initState();
+  }
+   Future<void> getSavedUserData() async {
+    Map<String, dynamic>? user = await authDataSources.getUserData();
+    setState(() {
+      userData = user;
+    });
+    print(userData);
+  }
+   
 
   void _onItemTapped(int index) {
     setState(() {
@@ -25,7 +43,7 @@ class _LayoutState extends State<Layout> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: const DrawerWidget(),
+        drawer:  DrawerWidget(userData:userData),
         backgroundColor: Colors.grey[300],
         appBar: AppBar(
           actions: const [
@@ -53,17 +71,17 @@ class _LayoutState extends State<Layout> {
               color: Color(0xffF4BF4B),
             )
           ],
-          title: const Column(
+          title:  Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Current Location",
+              "${userData?["role"] ?? 'Guest'}",
                 style: TextStyle(fontSize: 12, color: Color(0xff636A75)),
               ),
               Row(
                 children: [
                   Text(
-                    "15A James Street",
+                     "${userData?["mobile"] ?? 'Guest'}", 
                     style: TextStyle(fontSize: 18, color: Color(0xff172B4D)),
                   ),
                   Icon(Icons.arrow_drop_down)
@@ -109,9 +127,9 @@ class _LayoutState extends State<Layout> {
 
 
 class DrawerWidget extends StatelessWidget {
-  const DrawerWidget({
-    super.key,
-  });
+  final Map<String, dynamic>? userData; // Define userData as a class member
+
+  const DrawerWidget({Key? key, this.userData}) : super(key: key); // Accept userData as a parameter
 
   @override
   Widget build(BuildContext context) {
@@ -119,30 +137,30 @@ class DrawerWidget extends StatelessWidget {
       backgroundColor: const Color(0xff1c46e8),
       child: ListView(
         children: [
-          const SizedBox(
+          SizedBox(
             height: 120,
             child: DrawerHeader(
-                child: ListTile(
-              leading: CircleAvatar(
-                radius: 30,
-                backgroundImage: NetworkImage(
-                    'https://media.istockphoto.com/id/1434212178/photo/middle-eastern-lady-using-laptop-working-online-sitting-in-office.jpg?s=1024x1024&w=is&k=20&c=H640-Mts2rHSHLTkCd04WFd_VhcHMwX8kAGVXW4ddJY='),
+              child: ListTile(
+                leading: CircleAvatar(
+                  radius: 30,
+                  backgroundImage: NetworkImage(
+                      'https://media.istockphoto.com/id/1434212178/photo/middle-eastern-lady-using-laptop-working-online-sitting-in-office.jpg?s=1024x1024&w=is&k=20&c=H640-Mts2rHSHLTkCd04WFd_VhcHMwX8kAGVXW4ddJY='),
+                ),
+                title: Text(
+                  "${userData?["username"] ?? 'Guest'}", // Use userData parameter
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(
+                "${userData?["email"] ?? 'Guest'}", 
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-              title: Text(
-                "John Doe",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(
-                'Johndoe@gmail.com',
-                style: TextStyle(color: Colors.white),
-              ),
-            )),
+            ),
           ),
-          
-          drawerlsittile(
+       drawerlsittile(
             icon: Icons.calendar_month,
             action: () {}, 
             title: "Calendar",
@@ -182,7 +200,7 @@ class DrawerWidget extends StatelessWidget {
             action: () {}, 
             title: "Rate US",
           ),
-         Container(
+            Container(
           margin: const EdgeInsets.symmetric(horizontal: 30),
            child: ElevatedButton(
             onPressed: (){},
@@ -195,7 +213,6 @@ class DrawerWidget extends StatelessWidget {
             ],
            )),
          )
-         
         ],
       ),
     );

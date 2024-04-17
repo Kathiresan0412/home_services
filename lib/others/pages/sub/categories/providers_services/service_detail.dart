@@ -1,27 +1,70 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:home_services/others/pages/sub/categories/providers_services/service_controller.dart';
+import 'package:home_services/others/pages/sub/categories/providers_services/service_deatil_model.dart';
 import 'package:home_services/others/widgets/heading.dart';
 
 class Servicedetailpage extends StatefulWidget {
-  const Servicedetailpage({super.key});
+  final Map<dynamic, dynamic>? header;
+  const Servicedetailpage({Key? key, this.header}) : super(key: key);
 
   @override
   State<Servicedetailpage> createState() => _ServicedetailpageState();
 }
 
 class _ServicedetailpageState extends State<Servicedetailpage> {
-  bool ishome = true;
+  final SerivesController serivesController = SerivesController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Fetch service details when the widget initializes
+    serivesController.fetchDetailsOfService(widget.header?['id']);
+  }
+   bool ishome = true;
   bool isOffice = false;
   bool isvila = false;
-  int units = 0;
-  int bedrooms = 0;
+  int units = 1;
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(""),
-        ),
-        body: Container(
+    return StreamBuilder<CarteServiceDetails>(
+      stream: serivesController.serviceDeatilStream,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // Show loading indicator while waiting for data
+          return Scaffold(
+            appBar: AppBar(title: Text('Loading...')),
+            body: Center(child: CircularProgressIndicator()),
+          );
+        } else if (snapshot.hasError) {
+          // Show error message if there's an error
+          return Scaffold(
+            appBar: AppBar(title: Text('Error')),
+            body: Center(child: Text('Error: ${snapshot.error}')),
+          );
+        } else if (!snapshot.hasData) {
+          // Show message if no data available
+          return Scaffold(
+            appBar: AppBar(title: Text('No Data')),
+            body: Center(child: Text('No data available')),
+          );
+        } else {
+          // Data is available, use it to build UI
+          final serviceDetail = snapshot.data!;
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("")
+            ),
+            body: buildBody(serviceDetail),
+          );
+        }
+      },
+    );
+  }
+
+  Widget buildBody(CarteServiceDetails serviceDetail) {
+    return Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           color: Colors.grey[300],
@@ -32,10 +75,10 @@ class _ServicedetailpageState extends State<Servicedetailpage> {
                   padding: const EdgeInsets.only(left: 10, top: 50),
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.3,
-                  decoration: const BoxDecoration(
+                  decoration:  BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage('images/acrepair.png'))),
+                          image: NetworkImage('${serviceDetail.service!.img}'))),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,8 +104,8 @@ class _ServicedetailpageState extends State<Servicedetailpage> {
                           ],
                         ),
                       ),
-                      const Text(
-                        "Home cleaning",
+                       Text(
+                       '${serviceDetail.service!.name}',
                         style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
@@ -87,100 +130,14 @@ class _ServicedetailpageState extends State<Servicedetailpage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Heading(
-                        title: "Type of Property",
+                       Heading(
+                        title:'${serviceDetail.service!.serviceType!.name}',
                       ),
                       const SizedBox(
                         height: 20,
                       ),
                       selectioncolumn(),
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        width: double.infinity,
-                        // height: 200,
-                        // color: Colors.amber,
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "Number of Units",
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                SizedBox(
-                                  child: Row(children: [
-                                    Countbutton(
-                                        icon: Icons.add,
-                                        onTap: () {
-                                          setState(() {
-                                            units = units + 1;
-                                          });
-                                        }),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(units.toString()),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Countbutton(
-                                      icon: Icons.remove,
-                                      onTap: () {
-                                        setState(() {
-                                          if (units > 0) {
-                                            units = units - 1;
-                                          }
-                                        });
-                                      },
-                                    )
-                                  ]),
-                                )
-                              ],
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "Number of Bedrooms",
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                SizedBox(
-                                  child: Row(children: [
-                                    Countbutton(
-                                        icon: Icons.add,
-                                        onTap: () {
-                                          setState(() {
-                                            bedrooms = bedrooms + 1;
-                                          });
-                                        }),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(bedrooms.toString()),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Countbutton(
-                                      icon: Icons.remove,
-                                      onTap: () {
-                                        setState(() {
-                                          if (bedrooms > 0) {
-                                            bedrooms = bedrooms - 1;
-                                          }
-                                        });
-                                      },
-                                    )
-                                  ]),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                     SizedBox(height: 20,),
                       const Heading(
                         title: "Description",
                       ),
@@ -189,22 +146,21 @@ class _ServicedetailpageState extends State<Servicedetailpage> {
                         margin: const EdgeInsets.all(10),
                         padding: const EdgeInsets.all(10),
                         width: double.infinity,
-                        child: const SingleChildScrollView(
+                        child:  SingleChildScrollView(
                             child: Text(
-                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lore",
+                          '${serviceDetail.service!.serviceType!.description}',
                           style: TextStyle(fontWeight: FontWeight.w600),
                         )),
                       ),
-                      
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
                           children: [
                             const Divider(color: Colors.grey,),
-                            const Row(
+                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Total:USD 150",
+                                Text("Total: Rs.${serviceDetail.amountPerHour! * units}",
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                                 Text(
@@ -215,34 +171,36 @@ class _ServicedetailpageState extends State<Servicedetailpage> {
                                 )
                               ],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const ElevatedButton(
-                                    onPressed: null,
-                                    child: Text(
-                                      "Save Darft",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                    )),
-                                ElevatedButton(
-                                  onPressed: null,
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                      const Color(
-                                          0xff6759ff), // Use Color constructor to create a Color object
-                                    ),
-                                  ),
-                                  child: const Text(
-                                    "Book Now",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: ElevatedButton(
+                                onPressed: (){
+                                  print(serviceDetail.provider!.user!.name);
+                 Navigator.of(context).pushNamed(
+  "/BookingService",
+  arguments: {
+    'Provider_name':serviceDetail.provider!.user!.name,
+    'Provider_id': serviceDetail.providerId,
+    'amount': serviceDetail.amountPerHour,
+    'hours': units,
+  },
+);
+
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    const Color(
+                                        0xff6759ff), // Use Color constructor to create a Color object
                                   ),
                                 ),
-                              ],
+                                child: const Text(
+                                  "Book Now",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                              ),
                             )
                           ],
                         ),
@@ -256,9 +214,9 @@ class _ServicedetailpageState extends State<Servicedetailpage> {
               
             ],
           ),
-        ),
-      ),
-    );
+        );
+    
+  
   }
 
   Row selectioncolumn() {
@@ -386,4 +344,5 @@ class Countbutton extends StatelessWidget {
       ),
     );
   }
-}
+  }
+

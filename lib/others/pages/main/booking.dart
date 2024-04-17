@@ -10,6 +10,7 @@ class Booking extends StatelessWidget {
       length: 3, 
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Heading(title: "Booking"),
           bottom: const TabBar(
             tabs: [

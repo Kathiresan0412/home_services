@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:home_services/onboardings/one.dart';
-import 'package:home_services/others/pages/sub/service_detail.dart';
+import 'package:home_services/others/auth/login/presenters/login_screen.dart';
+import 'package:home_services/others/onboardings/one.dart';
+import 'package:home_services/others/pages/main/layout.dart';
+import 'package:home_services/others/pages/sub/categories/providers_services/service_detail.dart';
 
 
 import 'package:home_services/routes/routes.dart';
@@ -22,7 +24,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: Servicedetailpage(),
+      // home: Layout(),
+      
      
     );
   }
