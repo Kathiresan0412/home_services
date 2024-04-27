@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.2.2
   http: ^1.1.0
+  date_time_picker: "^2.1.0"
+  shimmer: ^3.0.0
+ 
 
 dev_dependencies:
   flutter_test:
@@ -62,13 +65,13 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-      - images/Group.jpg
-      - images/Ellipse.jpg
-      - images/image_girl.jpg
-      - images/image_boy.jpg
-      - images/logo2.jpg
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+     - images/Group.jpg
+     - images/Ellipse.jpg
+     - images/image_girl.jpg
+     - images/image_boy.jpg
+     - images/logo2.jpg
+     - images/acrepair.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
