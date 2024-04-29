@@ -17,9 +17,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   AuthDataSources authDataSources = AuthDataSources();
-  final AllcategoriesController allcategoriesController = AllcategoriesController();
-       Map<String, dynamic>? userData;
- 
+  final AllcategoriesController allcategoriesController =
+      AllcategoriesController();
+  Map<String, dynamic>? userData;
 
   @override
   void initState() {
@@ -27,7 +27,8 @@ class _HomeState extends State<Home> {
     allcategoriesController.fetchCategories();
     super.initState();
   }
- Future<void> getSavedUserData() async {
+
+  Future<void> getSavedUserData() async {
     Map<String, dynamic>? user = await authDataSources.getUserData();
     setState(() {
       userData = user;
@@ -60,15 +61,16 @@ class _HomeState extends State<Home> {
                 Row(
                   children: [
                     Text(
-                    // userData != null ? "hi ${userData!.username} " : 'No user data available',
-"hi ${userData?["username"] ?? 'Guest'}",
+                      // userData != null ? "hi ${userData!.username} " : 'No user data available',
+                      "hi ${userData?["username"] ?? 'Guest'}",
 
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                      style:
+                          const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    Icon(Icons.waving_hand, color: Colors.amber)
+                    const Icon(Icons.waving_hand, color: Colors.amber)
                   ],
                 ),
                 const Text(
@@ -78,7 +80,7 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   height: 10,
                 ),
-                SearchBox()
+                const SearchBox()
               ],
             ),
           ),
@@ -121,7 +123,7 @@ class _HomeState extends State<Home> {
                   stream: allcategoriesController.firstThreeCategoriesStream,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     } else if (snapshot.hasError) {
                       return Text('Error: ${snapshot.error}');
                     } else {
@@ -129,50 +131,49 @@ class _HomeState extends State<Home> {
                         children: [
                           SizedBox(
                             height: 150,
-                            child:ListView.builder(
-  scrollDirection: Axis.horizontal,
-  itemCount: snapshot.data!.length + 1,
-  itemBuilder: (context, index) {
-    // Check if it's the last item (for the additional button)
-    if (index == snapshot.data!.length) {
-      // Return a widget for the additional button
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: GestureDetector(
-          onTap: () {
-          Navigator.of(context).pushNamed("/allcategories");
-          },
-          child: CircularSercicecard(
-            title: "see all",
-            
-          ),
-        ),
-      );
-    } else {
-      // Return the CircularServiceCard for other items
-      final category = snapshot.data![index];
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: GestureDetector(
-          onTap: () {
-          Navigator.of(context).pushNamed(
-  "/services",
-  arguments: {'id': category.id},
-);
-          
-          },
-          child: CircularSercicecard(
-            title: category.name,
-            imageUrl: category.img,
-          ),
-        ),
-      );
-    }
-  },
-),
-
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: snapshot.data!.length + 1,
+                              itemBuilder: (context, index) {
+                                // Check if it's the last item (for the additional button)
+                                if (index == snapshot.data!.length) {
+                                  // Return a widget for the additional button
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 40.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context)
+                                            .pushNamed("/allcategories");
+                                      },
+                                      child: const CircularSercicecard(
+                                        title: "see all",
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  // Return the CircularServiceCard for other items
+                                  final category = snapshot.data![index];
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).pushNamed(
+                                          "/services",
+                                          arguments: {'id': category.id},
+                                        );
+                                      },
+                                      child: CircularSercicecard(
+                                        title: category.name,
+                                        imageUrl: category.img,
+                                      ),
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
                           ),
-                         
                         ],
                       );
                     }
@@ -185,15 +186,15 @@ class _HomeState extends State<Home> {
             height: 10,
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            padding: EdgeInsets.only(top: 15),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,
             ),
             child: Column(
               children: [
-                Heading(title: "Cleaning Services"),
+                const Heading(title: "Cleaning Services"),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   width: double.infinity,
@@ -231,7 +232,9 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          SizedBox(height: 10,)
+          const SizedBox(
+            height: 10,
+          )
         ],
       ),
     );
@@ -249,7 +252,7 @@ class _HomeState extends State<Home> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
               Text(
                 "Deals For You",
@@ -268,21 +271,21 @@ class _HomeState extends State<Home> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Text(
+          const Text(
             "Get Flat 50% off on first booking above 100",
             style: TextStyle(
               fontSize: 15,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           ElevatedButton(
             onPressed: () {},
-            child: Text("Grab Offer"),
+            child: const Text("Grab Offer"),
             style: ElevatedButton.styleFrom(),
           ),
         ],
@@ -322,10 +325,10 @@ class CleaningServiceList extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
