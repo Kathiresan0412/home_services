@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:home_services/others/pages/sub/categories/providers_services/service_model.dart';
 
 class ServiceCard extends StatelessWidget {
@@ -70,14 +71,18 @@ class ServiceCard extends StatelessWidget {
                         ),
                                            ),
                      ),
-                     Text(
-                       "(${service.providerName})",
-                       style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                      ),
-                    ),
+                     Container(
+                        width: 50,
+                       child: Text(
+                         "(${service.providerName})",
+                          overflow: TextOverflow.ellipsis,
+                         style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                        ),
+                                           ),
+                     ),
                   ],
                 ),
                 Text(
