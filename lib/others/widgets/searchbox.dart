@@ -12,14 +12,35 @@ class SearchBox extends StatelessWidget {
      
       child: TextField(
         decoration: InputDecoration(
+        
           contentPadding: EdgeInsets.all(8),
            filled: true,
           fillColor: Colors.grey[180],
           hintText: 'Search what you need...',
           // border: InputBorder.none,
           labelText: 'Search',
-          border: OutlineInputBorder(),
-          suffixIcon: Icon(Icons.search),
+           border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10), 
+      borderSide: BorderSide(
+        color: Colors.red, 
+        width: 5, 
+      ),
+
+    ),
+     focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(
+        color: Color(0xFF6759FF), // Color when focused
+        width: 2, // Width when focused
+      ),
+    ),
+          suffixIcon: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+                color: Color(0xFF6759FF),
+            ),
+       
+            child: Icon(Icons.search,color: Colors.white,),),
         ),
       ),
     );

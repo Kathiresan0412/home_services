@@ -109,6 +109,7 @@ class _HomeState extends State<Home> {
           ),
           Container(
             padding: const EdgeInsets.all(15),
+            margin: EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,

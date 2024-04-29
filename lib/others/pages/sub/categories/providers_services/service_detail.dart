@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -134,21 +135,31 @@ class _ServicedetailpageState extends State<Servicedetailpage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Heading(
-                      title: '${serviceDetail.service!.serviceType!.name}',
+                    Container(
+                      margin: EdgeInsets.only(left: 10),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text( '${serviceDetail.service!.serviceType!.name}',style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 25,
+                            ),),
+                        ),
                     ),
+                    // Heading(
+                    //   title: '${serviceDetail.service!.serviceType!.name}',
+                    // ),
                     const SizedBox(
                       height: 20,
                     ),
-                    selectioncolumn(),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    // selectioncolumn(),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     const Heading(
                       title: "Description",
                     ),
                     Container(
-                      height: 70,
+                      height: 130,
                       margin: const EdgeInsets.all(10),
                       padding: const EdgeInsets.all(10),
                       width: double.infinity,

@@ -45,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 Center(
                   child: Text(
                     "Create Account",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30,color: Color(0xFF6759FF)),
                   ),
                 ),
                 const SizedBox(
@@ -172,7 +172,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       },
                       icon: Icon(
                         _passwordVisible ? Icons.visibility_off : Icons.visibility,
-                        color: const Color(0xff0A8494),
+                        color: const Color(0xFF6759FF),
                       ),
                     ),
                   ),
@@ -199,7 +199,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: const Color(0xff0A8494),
+                      color: const Color(0xFF6759FF),
                     ),
                     child: const Center(
                       child: Text(
@@ -223,7 +223,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       },
                       child: const Text(
                         'Login',
-                        style: TextStyle(color: Color(0xff0A8494)),
+                        style: TextStyle(color:Color(0xFF6759FF)),
                       ),
                     ),
                   ],
