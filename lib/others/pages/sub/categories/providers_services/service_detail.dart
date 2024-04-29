@@ -201,6 +201,9 @@ class _ServicedetailpageState extends State<Servicedetailpage> {
                         onPressed: () {
                          print(rate);
                          print(rateconytroller.text);
+                         setState(() {
+                           
+                         });
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(

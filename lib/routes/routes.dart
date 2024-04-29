@@ -15,10 +15,11 @@ import 'package:home_services/others/pages/sub/categories/painting.dart';
 import 'package:home_services/others/pages/sub/categories/plumbing.dart';
 import 'package:home_services/others/pages/sub/categories/shifting.dart';
 import 'package:home_services/others/pages/sub/categories/providers_services/service_detail.dart';
+import 'package:home_services/routes/splash.dart';
 
 
 final routes={
-'/': (BuildContext context) => const Layout(),
+'/': (BuildContext context) => const SplashScreen(),
 "/onboardingOne":(BuildContext context)=>const OnboardingOne(),
   '/homePage': (BuildContext context) =>  const Layout(),
   '/home': (BuildContext context) =>  const Layout(),
