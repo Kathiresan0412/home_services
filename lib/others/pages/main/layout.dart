@@ -203,7 +203,14 @@ class DrawerWidget extends StatelessWidget {
             Container(
           margin: const EdgeInsets.symmetric(horizontal: 30),
            child: ElevatedButton(
-            onPressed: (){},
+           onPressed: () {
+  Navigator.pushNamedAndRemoveUntil(
+    context,
+    '/LoginScreen', // The name of the route to navigate to
+    (route) => false, // This function determines which routes to keep. Returning 'false' clears all previous routes.
+  );
+},
+
              child:  const Row(
                mainAxisAlignment: MainAxisAlignment.center,
             children: [
