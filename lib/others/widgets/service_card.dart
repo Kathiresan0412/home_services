@@ -59,13 +59,17 @@ class ServiceCard extends StatelessWidget {
                 Row(
                   children: [
                    
-                     Text(
-                      "${service.serviceName}",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
+                     Container(
+                      width: 150,
+                       child: Text(
+                        "${service.serviceTypeName}",
+                         overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                                           ),
+                     ),
                      Text(
                        "(${service.providerName})",
                        style: TextStyle(

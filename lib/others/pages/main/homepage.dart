@@ -1,14 +1,13 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:home_services/others/auth/auth.dart';
-import 'package:home_services/others/auth/login/presenters/login_model.dart';
 import 'package:home_services/others/pages/sub/allcategories/allcategories_controlller.dart';
 import 'package:home_services/others/pages/sub/allcategories/category_model.dart';
+import 'package:home_services/others/pages/sub/categories/providers_services/service_controller.dart';
+import 'package:home_services/others/pages/sub/categories/providers_services/service_model.dart';
 import 'package:home_services/others/widgets/circularsericescard.dart';
 import 'package:home_services/others/widgets/heading.dart';
 import 'package:home_services/others/widgets/searchbox.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -19,12 +18,15 @@ class _HomeState extends State<Home> {
   AuthDataSources authDataSources = AuthDataSources();
   final AllcategoriesController allcategoriesController =
       AllcategoriesController();
+       SerivesController serivesController = SerivesController();
   Map<String, dynamic>? userData;
 
   @override
   void initState() {
     getSavedUserData();
     allcategoriesController.fetchCategories();
+
+    serivesController.fetchoneCategories();
     super.initState();
   }
 
@@ -192,45 +194,45 @@ class _HomeState extends State<Home> {
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,
             ),
-            child: Column(
-              children: [
-                const Heading(title: "Cleaning Services"),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      const CleaningServiceList(
-                        imageUrl:
-                            "https://img.freepik.com/free-photo/professional-cleaning-service-people-working-together-office_23-2150520596.jpg?t=st=1709177831~exp=1709181431~hmac=0470f9d232b93756ea1c88112dacf839627b4b4e2314ef3c2f8585397b24caee&w=826",
-                        title: "Home Cleaning",
-                      ),
-                      const CleaningServiceList(
-                        imageUrl:
-                            "https://img.freepik.com/free-photo/full-shot-men-cleaning-office_23-2149345551.jpg?t=st=1709182395~exp=1709185995~hmac=a6537319658d8d2c33ff50484b6f4ed527111ecddc9426644e3be28e5b020869&w=826",
-                        title: "Carpet Cleaning",
-                      ),
-                      const CleaningServiceList(
-                        imageUrl:
-                            "https://img.freepik.com/free-photo/disinfecting-home_155003-9129.jpg?t=st=1709182471~exp=1709186071~hmac=c758ab2655a167ccbddc39666f96f7cfd01cdbd53c51dc8586e42e387d8de4fd&w=826",
-                        title: "Home Cleaning",
-                      ),
-                      const CleaningServiceList(
-                        imageUrl:
-                            "https://img.freepik.com/free-photo/full-shot-men-cleaning-office_23-2149345551.jpg?t=st=1709182395~exp=1709185995~hmac=a6537319658d8d2c33ff50484b6f4ed527111ecddc9426644e3be28e5b020869&w=826",
-                        title: "Carpet Cleaning",
-                      )
-                    ],
-                  ),
-                ),
-              ],
+            child:StreamBuilder<Object>(
+  stream: serivesController.onecategoryStream,
+  builder: (context, snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const CircularProgressIndicator();
+    } else if (snapshot.hasError) {
+      return Text('Error: ${snapshot.error}');
+    } else if (!snapshot.hasData ) {
+      return const Text('No data available');
+    } else {
+      final services = snapshot.data as List<Service>; // Assuming data is a list of Service objects
+      
+      return Column(
+        children: [
+           Heading(title:services[0].serviceName),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.25,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
             ),
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: services.map((service) {
+                return CleaningServiceList(
+                  imageUrl: "https://images.pexels.com/photos/19987317/pexels-photo-19987317/free-photo-of-ceiling-of-the-library-at-the-university-of-cambridge.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Modify as needed
+                  title: service.serviceTypeName, // Adjust based on your data
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      );
+    }
+  },
+)
+
           ),
           const SizedBox(
             height: 10,
@@ -326,11 +328,15 @@ class CleaningServiceList extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 5),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
+          Container(
+            width: 200,
+            child: Text(
+              title,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],

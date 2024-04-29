@@ -9,12 +9,15 @@ class SerivesController {
   final StreamController<List<Service>> _serviceStreamController = StreamController<List<Service>>();
 
   Stream<List<Service>> get categoryStream => _serviceStreamController.stream;
+
     // Create a StreamController to manage the stream of category data
   final StreamController<CarteServiceDetails> _serviceDeatilStreamController = StreamController<CarteServiceDetails>();
 
   Stream<CarteServiceDetails> get serviceDeatilStream => _serviceDeatilStreamController.stream;
+
+  StreamController<List<Service>> oneservicestreamcontroller=StreamController<List<Service>>();
  
- 
+ Stream<List<Service>> get onecategoryStream  => oneservicestreamcontroller.stream;
 
   void dispose() {
     _serviceStreamController.close();
@@ -35,6 +38,32 @@ Future<void> fetchCategories(int id) async {
       final List<Service> categories = data.map((json) => Service.fromJson(json)).toList();
       print(categories);
       _serviceStreamController.add(categories);
+    } else {
+      // If the request is not successful, throw an exception
+      throw Exception('Failed to load categories: ${response.statusCode}');
+    }
+  } catch (e) {
+    // If an error occurs during the request, throw an exception
+    throw Exception('Failed to load categories: $e');
+  }
+}
+Future<void> fetchoneCategories() async {
+  // API endpoint URL
+  String apiUrl = 'https://backendserve-production.up.railway.app/api/services/1/provider-service';
+
+  try {
+    // Make a GET request to the API endpoint
+    final response = await http.get(Uri.parse(apiUrl));
+
+    if (response.statusCode == 200) {
+      // If the request is successful, parse the response body
+      // and add the list of categories to the stream
+      final List<dynamic> data = jsonDecode(response.body);
+      final List<Service> categories = data.map((json) => Service.fromJson(json)).toList();
+      print("hi234");
+      print(categories);
+       print("hi234");
+      oneservicestreamcontroller.add(categories);
     } else {
       // If the request is not successful, throw an exception
       throw Exception('Failed to load categories: ${response.statusCode}');
