@@ -209,7 +209,7 @@ class _HomeState extends State<Home> {
       
       return Column(
         children: [
-           Heading(title:services[0].serviceName),
+           Heading(title:services[0].serviceName.toString()),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
             width: double.infinity,
@@ -223,7 +223,7 @@ class _HomeState extends State<Home> {
               children: services.map((service) {
                 return CleaningServiceList(
                   imageUrl: "https://images.pexels.com/photos/19987317/pexels-photo-19987317/free-photo-of-ceiling-of-the-library-at-the-university-of-cambridge.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Modify as needed
-                  title: service.serviceTypeName, // Adjust based on your data
+                  title: service.serviceTypeName.toString(), // Adjust based on your data
                 );
               }).toList(),
             ),

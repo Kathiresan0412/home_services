@@ -48,7 +48,7 @@ Widget build(BuildContext context) {
               final service = snapshot.data![index];
               return Column(
                 children: [
-                  Heading(title: service.serviceName),
+                  Heading(title: service.serviceName.toString()),
                   ServiceCard(service: service),
                   SizedBox(height: 10),
                 ],

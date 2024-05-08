@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:home_services/others/auth/auth.dart';
+import 'package:home_services/others/pages/sub/categories/booking/bookContolller.dart';
+import 'package:home_services/others/pages/sub/categories/booking/bookmodel.dart';
 
 class BookingService extends StatefulWidget {
   final Map<dynamic, dynamic>? header;
@@ -10,18 +13,45 @@ class BookingService extends StatefulWidget {
 }
 
 class _BookingService extends State<BookingService> {
-  final TextEditingController locationController = TextEditingController();
+  final TextEditingController locationController = TextEditingController(); 
+  AuthDataSources authDataSources = AuthDataSources();
+  Map<String, dynamic>? userData;
 
   
   DateTime? _fromDate;
   DateTime? _toDate;
-  void _confirmBooking() {
-     print("Location: ${locationController.text}");
-    print(widget.header?['Provider_id']);
-    print(widget.header?['amount']);
-    print("Start Date and Time: ${_fromDate.toString()}");
-    print("End Date and Time: ${_toDate.toString()}");
+  BookContolller bookContolller =BookContolller();
+  
+ Future<void> _confirmBooking() async {
+    // Simulate fetching user data
+    Map<String, dynamic>? user = await authDataSources.getUserData();
+    setState(() {
+      userData = user;
+    });
+
+    // Ensure all necessary data is provided
+    if (_fromDate == null || _toDate == null || locationController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please fill in all fields before confirming.')),
+      );
+      return;
+    }
+
+    // Create a BookingRequest object
+    final bookingRequest = BookingRequest(
+      customerId: userData?["id"] ?? 0, 
+      fromDateTime: _fromDate!.toIso8601String(),
+      toDateTime: _toDate!.toIso8601String(),
+      amount: widget.header?['amount'] ?? 0,
+      location: locationController.text,
+      serviceProviderId: widget.header?['Provider_id'] ?? 0, 
+    );
+
+    // Pass the BookingRequest object to createBooking
+    await bookContolller.createBooking(bookingRequest);
+    print("fhsiisksmmsmsmmsmms");
   }
+
 
   @override
   void initState() {

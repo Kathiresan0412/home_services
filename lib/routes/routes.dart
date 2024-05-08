@@ -19,7 +19,7 @@ import 'package:home_services/routes/splash.dart';
 
 
 final routes={
-'/': (BuildContext context) => const SplashScreen(),
+'/': (BuildContext context) => const Layout(),
 "/onboardingOne":(BuildContext context)=>const OnboardingOne(),
   '/homePage': (BuildContext context) =>  const Layout(),
   '/home': (BuildContext context) =>  const Layout(),

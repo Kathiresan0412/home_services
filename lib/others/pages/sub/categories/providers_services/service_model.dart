@@ -1,24 +1,24 @@
 class Service {
-  final int providerId;
-  final int serviceId;
-  final int amountPerHour;
-  final String serviceName;
-  final String serviceDescription;
-  final String providerName;
-  final String serviceTypeName;
-  final double rating;
-  final String feedback;
+  final int? providerId;
+  final int? serviceId;
+  final int? amountPerHour;
+  final String? serviceName;
+  final String? serviceDescription;
+  final String? providerName;
+  final String? serviceTypeName;
+  final double? rating;
+  final String? feedback;
 
   Service({
-    required this.providerId,
-    required this.serviceId,
-    required this.amountPerHour,
-    required this.serviceName,
-    required this.serviceDescription,
-    required this.providerName,
-    required this.serviceTypeName,
-    required this.rating,
-    required this.feedback,
+    this.providerId,
+    this.serviceId,
+    this.amountPerHour,
+    this.serviceName,
+    this.serviceDescription,
+    this.providerName,
+    this.serviceTypeName,
+    this.rating,
+    this.feedback,
   });
 
   factory Service.fromJson(Map<String, dynamic> json) {
@@ -30,7 +30,7 @@ class Service {
       serviceDescription: json['service_description'],
       providerName: json['provider_name'],
       serviceTypeName: json['service_type_name'],
-      rating: json['rating'].toDouble(),
+      rating: json['rating'] != null ? (json['rating'] as num).toDouble() : null,
       feedback: json['feedback'],
     );
   }
