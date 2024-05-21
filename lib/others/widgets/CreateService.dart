@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:date_time_picker/date_time_picker.dart';
 import 'package:home_services/others/auth/auth.dart';
 import 'package:home_services/others/pages/sub/categories/booking/bookContolller.dart';
 import 'package:home_services/others/pages/sub/categories/booking/bookmodel.dart';
 
-class BookingService extends StatefulWidget {
+class CreateService extends StatefulWidget {
   final Map<dynamic, dynamic>? header;
-  const BookingService({Key? key, this.header}) : super(key: key);
+  const CreateService({Key? key, this.header}) : super(key: key);
 
   @override
-  State<BookingService> createState() => _BookingService();
+  State<CreateService> createState() => _CreateService();
 }
 
-class _BookingService extends State<BookingService> {
+class _CreateService extends State<CreateService> {
   final TextEditingController locationController = TextEditingController(); 
   AuthDataSources authDataSources = AuthDataSources();
   Map<String, dynamic>? userData;
@@ -21,7 +20,7 @@ class _BookingService extends State<BookingService> {
   DateTime? _toDate;
   BookController bookContolller = BookController();
   
-  Future<void> _confirmBooking() async {
+  Future<void> _createservice() async {
     // Simulate fetching user data
     Map<String, dynamic>? user = await authDataSources.getUserData();
     setState(() {
@@ -86,7 +85,7 @@ class _BookingService extends State<BookingService> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Booking Services',
+                'Services Creation',
                 style: TextStyle(
                   fontSize: 25,
                   color: Color(0xff6759ff),
@@ -127,32 +126,6 @@ class _BookingService extends State<BookingService> {
                                     children: [
                                       const Row(
                                         children: [
-                                          Icon(Icons.edit_note, color: Color(0xff6759ff)),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            "ServiceProvider_Name",
-                                            style: TextStyle(color: Color(0xff6759ff)),
-                                          ),
-                                        ],
-                                      ),
-                                      TextField(
-                                        enabled: false,
-                                        controller: TextEditingController(
-                                          text: widget.header?['Provider_name'] ?? '',
-                                        ),
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          hintText: "Type your reason...",
-                                          hintStyle: TextStyle(color: Colors.grey[500]),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  const Divider(color: Color(0xff6759ff)),
-                                  Column(
-                                    children: [
-                                      const Row(
-                                        children: [
                                           Icon(Icons.paid, color: Color(0xff6759ff)),
                                           SizedBox(width: 5),
                                           Text(
@@ -162,7 +135,7 @@ class _BookingService extends State<BookingService> {
                                         ],
                                       ),
                                       TextField(
-                                        enabled: false,
+                                        
                                         controller: TextEditingController(
                                           text: widget.header?['amount'].toString() ?? '',
                                         ),
@@ -174,72 +147,7 @@ class _BookingService extends State<BookingService> {
                                       )
                                     ],
                                   ),
-                                  const Divider(color: Color(0xff6759ff)),
-                                  Column(
-                                    children: [
-                                      const Row(
-                                        children: [
-                                          Icon(Icons.pin_drop, color: Color(0xff6759ff)),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            "Location",
-                                            style: TextStyle(color: Color(0xff6759ff)),
-                                          ),
-                                        ],
-                                      ),
-                                      TextField(
-                                        controller: locationController,
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          hintText: "Type detail...",
-                                          hintStyle: TextStyle(color: Colors.grey[500]),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  const Divider(color: Color(0xff6759ff)),
-                                  DateTimePicker(
-                                    type: DateTimePickerType.dateTimeSeparate,
-                                    dateMask: 'd MMM, yyyy',
-                                    firstDate: DateTime(2000),
-                                    lastDate: DateTime(2100),
-                                    icon: const Icon(Icons.event),
-                                    dateLabelText: 'Start Date',
-                                    timeLabelText: "Start Time",
-                                    selectableDayPredicate: (date) {
-                                      if (date.weekday == 6 || date.weekday == 7) {
-                                        return false;
-                                      }
-                                      return true;
-                                    },
-                                    onChanged: (val) {
-                                      setState(() {
-                                        _fromDate = DateTime.parse(val);
-                                      });
-                                    },
-                                  ),
-                                  const Divider(color: Color(0xff6759ff)),
-                                  DateTimePicker(
-                                    type: DateTimePickerType.dateTimeSeparate,
-                                    dateMask: 'd MMM, yyyy',
-                                    firstDate: DateTime(2000),
-                                    lastDate: DateTime(2100),
-                                    icon: const Icon(Icons.event),
-                                    dateLabelText: 'End Date',
-                                    timeLabelText: "End Time",
-                                    selectableDayPredicate: (date) {
-                                      if (date.weekday == 6 || date.weekday == 7) {
-                                        return false;
-                                      }
-                                      return true;
-                                    },
-                                    onChanged: (val) {
-                                      setState(() {
-                                        _toDate = DateTime.parse(val);
-                                      });
-                                    },
-                                  ),
-                                  const Divider(color: Color(0xff6759ff)),
+                                 
                                 ],
                               ),
                             ),
@@ -250,7 +158,7 @@ class _BookingService extends State<BookingService> {
                     const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
-                        _confirmBooking();
+                        _createservice();
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),

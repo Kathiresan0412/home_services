@@ -20,7 +20,7 @@ class AllcategoriesController {
   }
 
   Future<void> fetchCategories() async {
-    const String apiUrl = 'https://backendserve-production.up.railway.app/api/services';
+    const String apiUrl = 'https://homeservicebackend-production.up.railway.app/api/services';
 
     try {
       final response = await http.get(Uri.parse(apiUrl));

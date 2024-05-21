@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_services/others/auth/auth.dart';
 import 'package:home_services/others/pages/sub/allcategories/allcategories_controlller.dart';
 import 'package:home_services/others/pages/sub/allcategories/category_model.dart';
 import 'package:home_services/others/widgets/circularsericescard.dart';
@@ -15,10 +16,13 @@ class Allcategories extends StatefulWidget {
 class _AllcategoriesState extends State<Allcategories> {
   final AllcategoriesController allcategoriesController =
       AllcategoriesController();
+        AuthDataSources authDataSources = AuthDataSources();
+        Map<String, dynamic>? userData;
 
   @override
   void initState() {
     allcategoriesController.fetchCategories();
+    getSavedUserData();
     super.initState();
   }
 
@@ -26,6 +30,14 @@ class _AllcategoriesState extends State<Allcategories> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+  }
+  Future<void> getSavedUserData() async {
+    Map<String, dynamic>? user = await authDataSources.getUserData();
+    setState(() {
+      userData = user;
+    });
+    print(userData);
+   print( userData!['role']);
   }
 
   @override
@@ -63,10 +75,19 @@ class _AllcategoriesState extends State<Allcategories> {
                       children: snapshot.data!.map((category) {
                         return GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pushNamed(
+                            if(userData!['role']=='Customer'){
+                              Navigator.of(context).pushNamed(
                               "/services",
                               arguments: {'id': category.id},
                             );
+                            }else{
+                              Navigator.of(context).pushNamed(
+                              "/CreateService",
+                              arguments: {'id': category.id},
+                            );
+                            }
+
+                           
                           },
                           child: CircularSercicecard(
                             title: category.name,

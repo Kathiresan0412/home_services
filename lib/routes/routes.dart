@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_services/others/auth/login/presenters/login_screen.dart';
 import 'package:home_services/others/auth/register/presenters/register_screen.dart';
 import 'package:home_services/others/onboardings/one.dart';
+import 'package:home_services/others/pages/main/homepage.dart';
 import 'package:home_services/others/pages/main/layout.dart';
 import 'package:home_services/others/pages/sub/allcategories/allcategories.dart';
 import 'package:home_services/others/pages/sub/categories/booking/book.dart';
@@ -15,6 +16,7 @@ import 'package:home_services/others/pages/sub/categories/painting.dart';
 import 'package:home_services/others/pages/sub/categories/plumbing.dart';
 import 'package:home_services/others/pages/sub/categories/shifting.dart';
 import 'package:home_services/others/pages/sub/categories/providers_services/service_detail.dart';
+import 'package:home_services/others/widgets/CreateService.dart';
 import 'package:home_services/routes/splash.dart';
 
 
@@ -22,7 +24,7 @@ final routes={
 '/': (BuildContext context) => const Layout(),
 "/onboardingOne":(BuildContext context)=>const OnboardingOne(),
   '/homePage': (BuildContext context) =>  const Layout(),
-  '/home': (BuildContext context) =>  const Layout(),
+  '/home': (BuildContext context) =>   Home(),
   '/allcategories': (BuildContext context) =>  const Allcategories(),
    '/shifting': (BuildContext context) =>  const Shifting(),
    '/Appliance': (BuildContext context) =>  const Appliance(),
@@ -46,6 +48,7 @@ final routes={
   final arguments = ModalRoute.of(context)?.settings.arguments as Map?;
   return BookingService(header: arguments ?? {});
 },
+  "/CreateService": (BuildContext context) {return CreateService();},
 
    
 };

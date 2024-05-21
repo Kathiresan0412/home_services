@@ -12,7 +12,7 @@ Future<void> signup(
   String? selectedOption,
    context,
 ) async {
-  const url = 'https://backendserve-production.up.railway.app/api/customers'; // Assuming the registration endpoint is different
+  const url = 'https://homeservicebackend-production.up.railway.app/api/customers'; // Assuming the registration endpoint is different
   final headers = {'Content-Type': 'application/json'};
   final body = jsonEncode({
     'name': name,

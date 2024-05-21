@@ -25,7 +25,7 @@ class SerivesController {
 
 Future<void> fetchCategories(int id) async {
   // API endpoint URL
-  String apiUrl = 'https://backendserve-production.up.railway.app/api/services/$id/provider-service';
+  String apiUrl = 'https://homeservicebackend-production.up.railway.app/api/services/$id/provider-service';
 
   try {
     // Make a GET request to the API endpoint
@@ -49,7 +49,7 @@ Future<void> fetchCategories(int id) async {
 }
 Future<void> fetchoneCategories() async {
   // API endpoint URL
-  String apiUrl = 'https://backendserve-production.up.railway.app/api/services/1/provider-service';
+  String apiUrl = 'https://homeservicebackend-production.up.railway.app/api/services/1/provider-service';
 
   try {
     // Make a GET request to the API endpoint
@@ -76,7 +76,7 @@ Future<void> fetchoneCategories() async {
 Future<void> fetchDetailsOfService(int id) async {
   print(id);
   // API endpoint URL
-  String apiUrl = 'https://backendserve-production.up.railway.app/api/provider-service/$id';
+  String apiUrl = 'https://homeservicebackend-production.up.railway.app/api/provider-service/$id';
 
   try {
     // Make a GET request to the API endpoint

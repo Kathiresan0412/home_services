@@ -45,7 +45,16 @@ getSavedUserData();
       child: Scaffold(
         drawer:  DrawerWidget(userData:userData),
         backgroundColor: Colors.grey[300],
+          floatingActionButton: userData?['role'] == 'Customer'
+            ? null
+            : FloatingActionButton(
+                child: Icon(Icons.add),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/allcategories');
+                },
+              ),
         appBar: AppBar(
+        
           actions: const [
             SizedBox(
               height: 10,
